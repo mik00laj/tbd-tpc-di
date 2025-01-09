@@ -1,7 +1,5 @@
--- Sprawdzenie czy sk_customer_id jest unikatowy
-SELECT 
-  sk_customer_id, 
-  count(*) cnt
-FROM {{ ref('fact_cash_balances') }} 
-GROUP BY sk_customer_id
-HAVING cnt > 1
+-- Sprawdzenie czy klucze główne są unikatowe
+SELECT sk_account_id, COUNT(*) AS count
+FROM {{ ref('dim_account') }}
+GROUP BY sk_account_id
+HAVING count > 1
